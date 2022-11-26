@@ -1,6 +1,6 @@
 ---
 title: CLIP Interrogator 2
-emoji: 🌍
+emoji: 🕵️‍♂️🕵️‍♂️
 colorFrom: green
 colorTo: purple
 sdk: gradio
