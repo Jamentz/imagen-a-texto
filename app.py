@@ -1,4 +1,5 @@
-#@title Setup
+from share_btn import community_icon_html, loading_icon_html, share_js
+
 import os, subprocess
 
 def setup():
@@ -44,20 +45,21 @@ ci = Interrogator(config)
 def inference(image, mode, best_max_flavors):
     image = image.convert('RGB')
     if mode == 'best':
-        return ci.interrogate(image, max_flavors=int(best_max_flavors))
+        return ci.interrogate(image, max_flavors=int(best_max_flavors)), gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
     elif mode == 'classic':
-        return ci.interrogate_classic(image)
+        return ci.interrogate_classic(image), gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
     else:
-        return ci.interrogate_fast(image)
+        return ci.interrogate_fast(image), gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
 
 title = """
-    <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+    <div style="text-align: center; max-width: 500px; margin: 0 auto;">
         <div
         style="
             display: inline-flex;
             align-items: center;
             gap: 0.8rem;
             font-size: 1.75rem;
+            margin-bottom: 10px;
         "
         >
         <h1 style="font-weight: 600; margin-bottom: 7px;">
@@ -65,14 +67,15 @@ title = """
         </h1>
         </div>
         <p style="margin-bottom: 10px;font-size: 16px;font-weight: 100;line-height: 1.5em;">
-        Want to figure out what a good prompt might be to create new images like an existing one? The CLIP Interrogator is here to get you answers!
+        Want to figure out what a good prompt might be to create new images like an existing one? 
+        <br />The CLIP Interrogator is here to get you answers!
         <br />This version is specialized for producing nice prompts for use with Stable Diffusion 2.0 using the ViT-H-14 OpenCLIP model!
         </p>
     </div>
 """
 
 article = """
-<div style="text-align: center; max-width: 650px; margin: 0 auto;">
+<div style="text-align: center; max-width: 500px; margin: 0 auto;font-size: 94%;">
     
     <p>
     Server busy? You can also run on <a href="https://colab.research.google.com/github/pharmapsychotic/clip-interrogator/blob/open-clip/clip_interrogator.ipynb">Google Colab</a>
@@ -125,11 +128,19 @@ with gr.Blocks(css=css) as block:
         input_image = gr.Image(type='pil', elem_id="input-img")
         mode_input = gr.Radio(['best', 'classic', 'fast'], label='', value='best')
         flavor_input = gr.Number(value=4, label='best mode max flavors')
+        
         submit_btn = gr.Button("Submit")
+        
         output_text = gr.Textbox(label="Output", elem_id="output-txt")
-       
+        
+        with gr.Group(elem_id="share-btn-container"):
+            community_icon = gr.HTML(community_icon_html, visible=False)
+            loading_icon = gr.HTML(loading_icon_html, visible=False)
+            share_button = gr.Button("Share to community", elem_id="share-btn", visible=False)
+        
         gr.HTML(article)
 
-    submit_btn.click(fn=inference, inputs=[input_image,mode_input,flavor_input], outputs=[output_text])
-
+    submit_btn.click(fn=inference, inputs=[input_image,mode_input,flavor_input], outputs=[output_text, share_button, community_icon, loading_icon])
+    share_button.click(None, [], [], _js=share_js)
+    
 block.queue(max_size=32).launch(show_api=False)
