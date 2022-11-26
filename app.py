@@ -138,6 +138,10 @@ with gr.Blocks(css=css) as block:
             loading_icon = gr.HTML(loading_icon_html, visible=False)
             share_button = gr.Button("Share to community", elem_id="share-btn", visible=False)
         
+        examples=[['27E894C4-9375-48A1-A95D-CB2425416B4B.png'], ['DB362F56-BA98-4CA1-A999-A25AA94B723B.png']]
+        ex = gr.Examples(examples=examples, fn=inference, inputs=[input_image, "best", 4], outputs=[output_text, share_button, community_icon, loading_icon], cache_examples=True, run_on_click=True)
+        ex.dataset.headers = [""]
+        
         gr.HTML(article)
 
     submit_btn.click(fn=inference, inputs=[input_image,mode_input,flavor_input], outputs=[output_text, share_button, community_icon, loading_icon])
