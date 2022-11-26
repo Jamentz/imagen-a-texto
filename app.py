@@ -99,5 +99,7 @@ io = gr.Interface(
     inputs, 
     outputs, 
     allow_flagging=False,
+    title=title,
+    article=article
 )
 io.launch()
