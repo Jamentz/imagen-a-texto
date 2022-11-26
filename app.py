@@ -66,7 +66,7 @@ title = """
             CLIP Interrogator 2.1
         </h1>
         </div>
-        <p style="margin-bottom: 10px;font-size: 16px;font-weight: 100;line-height: 1.5em;">
+        <p style="margin-bottom: 10px;font-size: 94%;font-weight: 100;line-height: 1.5em;">
         Want to figure out what a good prompt might be to create new images like an existing one? 
         <br />The CLIP Interrogator is here to get you answers!
         <br />This version is specialized for producing nice prompts for use with Stable Diffusion 2.0 using the ViT-H-14 OpenCLIP model!
@@ -143,4 +143,4 @@ with gr.Blocks(css=css) as block:
     submit_btn.click(fn=inference, inputs=[input_image,mode_input,flavor_input], outputs=[output_text, share_button, community_icon, loading_icon])
     share_button.click(None, [], [], _js=share_js)
     
-block.queue(max_size=32).launch(show_api=False)
+block.queue(max_size=32,concurrency_count=20).launch(show_api=False)
