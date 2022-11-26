@@ -60,16 +60,17 @@ title = """
             font-size: 1.75rem;
         "
         >
-        <h1 style="font-weight: 900; margin-bottom: 7px;">
+        <h1 style="font-weight: 600; margin-bottom: 7px;">
             CLIP Interrogator 2.1
         </h1>
         </div>
-        <p style="margin-bottom: 10px; font-size: 94%">
+        <p style="margin-bottom: 10px;font-size: 16px;font-weight: 100;line-height: 1.5em;">
         Want to figure out what a good prompt might be to create new images like an existing one? The CLIP Interrogator is here to get you answers!
         <br />This version is specialized for producing nice prompts for use with Stable Diffusion 2.0 using the ViT-H-14 OpenCLIP model!
         </p>
     </div>
 """
+
 article = """
 <div style="text-align: center; max-width: 650px; margin: 0 auto;">
     
@@ -85,21 +86,50 @@ article = """
 </div>
 """
 
-inputs = [
-    gr.inputs.Image(type='pil'),
-    gr.Radio(['best', 'classic', 'fast'], label='', value='best'),
-    gr.Number(value=4, label='best mode max flavors'),
-]
-outputs = [
-    gr.outputs.Textbox(label="Output"),
-]
+css = '''
+#col-container {max-width: 700px; margin-left: auto; margin-right: auto;}
+a {text-decoration-line: underline; font-weight: 600;}
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+#share-btn-container {
+    display: flex; padding-left: 0.5rem !important; padding-right: 0.5rem !important; background-color: #000000; justify-content: center; align-items: center; border-radius: 9999px !important; width: 13rem;
+}
+#share-btn {
+    all: initial; color: #ffffff;font-weight: 600; cursor:pointer; font-family: 'IBM Plex Sans', sans-serif; margin-left: 0.5rem !important; padding-top: 0.25rem !important; padding-bottom: 0.25rem !important;
+}
+#share-btn * {
+    all: unset;
+}
+#share-btn-container div:nth-child(-n+2){
+    width: auto !important;
+    min-height: 0px !important;
+}
+#share-btn-container .wrap {
+    display: none !important;
+}
+'''
 
-io = gr.Interface(
-    inference, 
-    inputs, 
-    outputs, 
-    allow_flagging=False,
-    title=title,
-    article=article
-)
-io.launch()
+with gr.Blocks(css=css) as block:
+    with gr.Column(elem_id="col-container"):
+        gr.HTML(title)
+
+        input_image = gr.Image(type='pil', elem_id="input-img")
+        mode_input = gr.Radio(['best', 'classic', 'fast'], label='', value='best')
+        flavor_input = gr.Number(value=4, label='best mode max flavors')
+        submit_btn = gr.Button("Submit")
+        output_text = gr.Textbox(label="Output", elem_id="output-txt")
+       
+        gr.HTML(article)
+
+    submit_btn.click(fn=inference, inputs=[input_image,mode_input,flavor_input], outputs=[output_text])
+
+block.queue(max_size=32).launch(show_api=False)
