@@ -50,6 +50,41 @@ def inference(image, mode, best_max_flavors):
     else:
         return ci.interrogate_fast(image)
 
+title = """
+    <div style="text-align: center; max-width: 650px; margin: 0 auto;">
+        <div
+        style="
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.75rem;
+        "
+        >
+        <h1 style="font-weight: 900; margin-bottom: 7px;">
+            CLIP Interrogator 2.1
+        </h1>
+        </div>
+        <p style="margin-bottom: 10px; font-size: 94%">
+        Want to figure out what a good prompt might be to create new images like an existing one? The CLIP Interrogator is here to get you answers!
+        <br />This version is specialized for producing nice prompts for use with Stable Diffusion 2.0 using the ViT-H-14 OpenCLIP model!
+        </p>
+    </div>
+"""
+article = """
+<div style="text-align: center; max-width: 650px; margin: 0 auto;">
+    
+    <p>
+    Server busy? You can also run on <a href="https://colab.research.google.com/github/pharmapsychotic/clip-interrogator/blob/open-clip/clip_interrogator.ipynb">Google Colab</a>
+    </p>
+    <p>
+    Has this been helpful to you? Follow Pharma on twitter 
+    <a href="https://twitter.com/pharmapsychotic">@pharmapsychotic</a> 
+    and check out more tools at his
+    <a href="https://pharmapsychotic.com/tools.html">Ai generative art tools list</a>
+    </p>
+</div>
+"""
+
 inputs = [
     gr.inputs.Image(type='pil'),
     gr.Radio(['best', 'classic', 'fast'], label='', value='best'),
