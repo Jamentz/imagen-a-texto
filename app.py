@@ -35,6 +35,7 @@ import gradio as gr
 from clip_interrogator import Config, Interrogator
 
 config = Config()
+config.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 config.blip_offload = True
 config.chunk_size = 2048
 config.flavor_intermediate_count = 512
