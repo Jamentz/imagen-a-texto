@@ -1,6 +1,7 @@
 from share_btn import community_icon_html, loading_icon_html, share_js
 
 import os, subprocess
+import torch
 
 def setup():
     install_cmds = [
