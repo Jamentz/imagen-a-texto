@@ -163,7 +163,7 @@ with gr.Blocks(css=css) as block:
         
         gr.HTML(article)
 
-    submit_btn.click(fn=inference, inputs=[input_image,mode_input,flavor_input], outputs=[output_text, share_button, community_icon, loading_icon])
+    submit_btn.click(fn=inference, inputs=[input_image,mode_input,flavor_input], outputs=[output_text, share_button, community_icon, loading_icon], api_name="clipi2")
     share_button.click(None, [], [], _js=share_js)
     
 block.queue(max_size=32,concurrency_count=20).launch(show_api=False)
