@@ -46,40 +46,25 @@ def inference(image, mode, best_max_flavors):
     image = image.convert('RGB')
     if mode == 'best':
         
-        print("""————
-        new inference
-            mode: best
-        """)
-        
         prompt_result = ci.interrogate(image, max_flavors=int(best_max_flavors))
         
-        print(prompt_result)
+        print("mode best: " + prompt_result)
         
         return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
     
     elif mode == 'classic':
         
-        print("""————
-        new inference
-            mode: classic
-        """)
-        
         prompt_result = ci.interrogate_classic(image)
         
-        print(prompt_result)
+        print("mode classic: " + prompt_result)
         
         return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
     
     else:
         
-        print("""————
-        new inference
-            mode: best
-        """)
-        
         prompt_result = ci.interrogate_fast(image)
         
-        print(prompt_result)
+        print("mode fast: " + prompt_result)
         
         return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
 
