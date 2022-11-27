@@ -45,11 +45,20 @@ ci = Interrogator(config)
 def inference(image, mode, best_max_flavors):
     image = image.convert('RGB')
     if mode == 'best':
-        return ci.interrogate(image, max_flavors=int(best_max_flavors)), gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
+        print("mode: best")
+        prompt_result = ci.interrogate(image, max_flavors=int(best_max_flavors))
+        print(prompt_result)
+        return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
     elif mode == 'classic':
-        return ci.interrogate_classic(image), gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
+        print("mode: classic")
+        prompt_result = ci.interrogate_classic(image)
+        print(prompt_result)
+        return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
     else:
-        return ci.interrogate_fast(image), gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
+        print("mode: fast")
+        prompt_result = ci.interrogate_fast(image)
+        print(prompt_result)
+        return prompt_result, gr.update(visible=True), gr.update(visible=True), gr.update(visible=True)
 
 title = """
     <div style="text-align: center; max-width: 500px; margin: 0 auto;">
