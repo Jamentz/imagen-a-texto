@@ -146,12 +146,12 @@ with gr.Blocks(css=css) as block:
 
         input_image = gr.Image(type='pil', elem_id="input-img")
         with gr.Row():
-            mode_input = gr.Radio(['best', 'classic', 'fast'], label='', value='best')
+            mode_input = gr.Radio(['best', 'classic', 'fast'], label='Select mode', value='best')
             flavor_input = gr.Number(value=4, label='best mode max flavors')
         
         submit_btn = gr.Button("Submit")
         
-        output_text = gr.Textbox(label="Output", elem_id="output-txt")
+        output_text = gr.Textbox(label="Description Output", elem_id="output-txt")
         
         with gr.Group(elem_id="share-btn-container"):
             community_icon = gr.HTML(community_icon_html, visible=False)
