@@ -145,8 +145,9 @@ with gr.Blocks(css=css) as block:
         gr.HTML(title)
 
         input_image = gr.Image(type='pil', elem_id="input-img")
-        mode_input = gr.Radio(['best', 'classic', 'fast'], label='', value='best')
-        flavor_input = gr.Number(value=4, label='best mode max flavors')
+        with gr.Row():
+            mode_input = gr.Radio(['best', 'classic', 'fast'], label='', value='best')
+            flavor_input = gr.Number(value=4, label='best mode max flavors')
         
         submit_btn = gr.Button("Submit")
         
