@@ -123,7 +123,7 @@ a {text-decoration-line: underline; font-weight: 600;}
     }
 }
 #share-btn-container {
-    display: flex; padding-left: 0.5rem !important; padding-right: 0.5rem !important; background-color: #000000; justify-content: center; align-items: center; border-radius: 9999px !important; width: 13rem;
+    display: flex; padding-left: 0.5rem !important; padding-right: 0.5rem !important; background-color: #000000; justify-content: center; align-items: center; border-radius: 9999px !important; width: 15rem;
 }
 #share-btn {
     all: initial; color: #ffffff;font-weight: 600; cursor:pointer; font-family: 'IBM Plex Sans', sans-serif; margin-left: 0.5rem !important; padding-top: 0.25rem !important; padding-bottom: 0.25rem !important;
@@ -154,9 +154,9 @@ with gr.Blocks(css=css) as block:
         output_text = gr.Textbox(label="Description Output", elem_id="output-txt")
         
         with gr.Group(elem_id="share-btn-container"):
-            community_icon = gr.HTML(community_icon_html, visible=False)
-            loading_icon = gr.HTML(loading_icon_html, visible=False)
-            share_button = gr.Button("Share to community", elem_id="share-btn", visible=False)
+            community_icon = gr.HTML(community_icon_html, visible=True)
+            loading_icon = gr.HTML(loading_icon_html, visible=True)
+            share_button = gr.Button("Share with Community", elem_id="share-btn", visible=True)
 
         examples=[['27E894C4-9375-48A1-A95D-CB2425416B4B.png', "best",4], ['DB362F56-BA98-4CA1-A999-A25AA94B723B.png',"fast",4]]
         ex = gr.Examples(examples=examples, fn=inference, inputs=[input_image, mode_input, flavor_input], outputs=[output_text, share_button, community_icon, loading_icon], cache_examples=True, run_on_click=True)
