@@ -33,11 +33,9 @@ sys.path.append('src/blip')
 sys.path.append('clip-interrogator')
 
 import gradio as gr
-import spaces
 from clip_interrogator import Config, Interrogator
 
 config = Config()
-@spaces.GPU
 config.device = 'cuda' if torch.cuda.is_available() else 'cpu'
 config.blip_offload = False if torch.cuda.is_available() else True
 config.chunk_size = 2048
@@ -46,7 +44,6 @@ config.blip_num_beams = 64
 ci = Interrogator(config)
 
 
-@spaces.GPU
 def inference(image, mode, best_max_flavors):
     
     
