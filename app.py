@@ -163,7 +163,7 @@ with gr.Blocks(css=css) as block:
             share_button = gr.Button("Share with Community", elem_id="share-btn", visible=True)
 
         examples=[['27E894C4-9375-48A1-A95D-CB2425416B4B.png', "best",4], ['DB362F56-BA98-4CA1-A999-A25AA94B723B.png',"fast",4]]
-        ex = gr.Examples(examples=examples, fn=inference, inputs=[input_image, mode_input, flavor_input], outputs=[output_text, share_button, community_icon, loading_icon], cache_examples=True, run_on_click=True)
+        ex = gr.Examples(examples=examples, fn=inference, inputs=[input_image, mode_input, flavor_input], outputs=[output_text, share_button, community_icon, loading_icon], cache_examples=False, run_on_click=True)
         ex.dataset.headers = [""]
         
         gr.HTML(article)
