@@ -33,6 +33,7 @@ sys.path.append('src/blip')
 sys.path.append('clip-interrogator')
 
 import gradio as gr
+import spaces
 from clip_interrogator import Config, Interrogator
 
 config = Config()
@@ -44,6 +45,7 @@ config.blip_num_beams = 64
 
 ci = Interrogator(config)
 
+@spaces.GPU
 def inference(image, mode, best_max_flavors):
     image = image.convert('RGB')
     if mode == 'best':
