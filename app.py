@@ -43,10 +43,12 @@ config.chunk_size = 2048
 config.flavor_intermediate_count = 512
 config.blip_num_beams = 64
 
-ci = Interrogator(config)
+
 
 @spaces.GPU
 def inference(image, mode, best_max_flavors):
+    ci = Interrogator(config)
+    
     image = image.convert('RGB')
     if mode == 'best':
         
